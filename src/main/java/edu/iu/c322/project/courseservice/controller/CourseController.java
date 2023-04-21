@@ -16,18 +16,18 @@ public class CourseController {
         this.repository = repository;
     }
 
-    @GetMapping
+    @GetMapping("/course")
     public List<Course> findAll(){
         return repository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Course find(@PathVariable int id){
-        return repository.findById(id).orElse(null);
+    @GetMapping("/course/{courseId}")
+    public Course find(@PathVariable int courseId){
+        return repository.findById(courseId).orElse(null);
     }
 
 
-    @PostMapping
+    @PostMapping("/course")
     public int addCourse(@RequestBody Course course){
         for(int i = 0; i < course.getTimeSlots().size(); i++){
             TimeSlot timeSlot = course.getTimeSlots().get(i);
@@ -39,16 +39,16 @@ public class CourseController {
     }
 
 
-    @PutMapping("/{id}")
-    public void updateCourse(@PathVariable int id, @RequestBody Course course){
-        course.setId(id);
+    @PutMapping("/course/{courseId}")
+    public void updateCourse(@PathVariable int courseId, @RequestBody Course course){
+        course.setId(courseId);
         repository.save(course);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id){
+    @DeleteMapping("/course/{courseId}")
+    public void delete(@PathVariable int courseId){
         Course course = new Course();
-        course.setId(id);
+        course.setId(courseId);
         repository.delete(course);
     }
 
